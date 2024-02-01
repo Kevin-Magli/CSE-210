@@ -59,6 +59,10 @@ class Program
                 Console.Write($"{word} ");
             }
             Console.ReadLine();
+            foreach (int n in randomIndices)
+            {
+                Console.Write($"{n} ");
+            }
             totalNumbersToAdd = 0;
         }
 
