@@ -5,64 +5,102 @@ class Program
     static void Main(string[] args)
     {   
 
-        // The code starts with a string scriptureEntry that represents a Bible verse. It prints this verse to the console.
-        string scriptureEntry = "James 1:5 If any of you lacks wisdom, let him ask God, who gives generously to all without reproach, and it will be given him.";
-        Console.WriteLine(scriptureEntry);
+    }
+}
 
+class Activity
+{
+    /* Methods: 
+    1. opening message displaying the name of the activity, description
+    1.1 asks the duration of the activity in seconds and sets it.
+    2. ending message "good job", what activity was completed,  how much time was spended, and pauses before finished.
+    3. Create pause animation
+    */
 
-        // The verse is then split into words, and the first two words are stored in book and reference. The remaining words are stored in the words list after removing the first two words.
-        List<string> _wordsToMemorize = scriptureEntry.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+    private string _name;
+    private string _description;
+    private int _duration;
 
-        string book = _wordsToMemorize[0];
-        string reference = _wordsToMemorize[1];
-        _wordsToMemorize.RemoveRange(0, 2);
-        
-        // this is generating a random number between 0 and the number of words in the list words
-        // The code initializes a Random object and a HashSet<int> to keep track of randomly selected word indices.
-        Random random = new Random();
-        HashSet<int> randomIndices = new HashSet<int>();
+    public Activity(string name, string description, int duration)
+    {
+        _name = name;
+        _description = description;
+        _duration = duration;
 
-        // int maxNumbersToAdd = Math.Min(3, _wordsToMemorize.Count); // no more than 3 random indices will be added
-        int maxNumbersToAdd = 3; // no more than 3 random indices will be added
-        int totalNumbersToAdd = 0; // title is self explanatory. This is basically "how many numbers were added thus far.
+    }
 
+    public static Activity DisplayOpeningMessage(string name, string description)
+    {
+        Console.WriteLine($"Welcome to the {name} Activity.{Environment.NewLine}");
+        Console.WriteLine(description + Environment.NewLine);
+        Console.Write("How long, in seconds would you like for your section? ");
+        int durationInput = int.Parse(Console.ReadLine());
+        return new Activity(null, null, durationInput);
+    }
 
-        while(true)
-        {
-            while(!(maxNumbersToAdd == totalNumbersToAdd))
-            {
-                int index = random.Next(_wordsToMemorize.Count);
-                while (randomIndices.Contains(index))
-                {
-                    index = random.Next(_wordsToMemorize.Count);
-                }
+    public static void DisplayEndingMessage(string ending, string _name, int _duration)
+    {
+        Console.WriteLine("Well Done!!");
+        Console.WriteLine();
+        Console.WriteLine($"You have completed {_duration} seconds of the {_name} Activity.");
+    }
 
-                randomIndices.Add(index);
-                totalNumbersToAdd++;
-                Console.WriteLine(index);
+    public static void DisplayPauseAnimation()
+    {
+        ;
+    }
 
-                if (_wordsToMemorize.Count == randomIndices.Count)
-                {
-                    Console.WriteLine("The end");
-                    break;
-                }
+    
+    
+    class Breathing
+    {
+        /*
+        - attribute: description = "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing"
+        - Create alternate messages of Breathe in Breathe out. After each message the program pauses and shows a countdown.
+        - This continues until the seconds determined by the user reach their point.
+        */
+    }
+    class Reflection
+    {
+        /*
+        - attribute: description = "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life."
+        - Display a random prompt from a list.
+            prompts = {
+                Think of a time when you stood up for someone else.
+                Think of a time when you did something really difficult.
+                Think of a time when you helped someone in need.
+                Think of a time when you did something truly selfless.
             }
-            foreach (int index in randomIndices)
-            {
-                string word = _wordsToMemorize[index];
-                string underscore = new string('_', word.Length);
-                _wordsToMemorize[index] = underscore;
+        - Display reflect question from the list:
+            reflectQuestion = {
+                Why was this experience meaningful to you?
+                Have you ever done anything like this before?
+                How did you get started?
+                How did you feel when it was complete?
+                What made this time different than other times when you were not as successful?
+                What is your favorite thing about this experience?
+                What could you learn from this experience that applies to other situations?
+                What did you learn about yourself through this experience?
+                How can you keep this experience in mind in the future?
             }
-
-            foreach (string word in _wordsToMemorize)
-            {
-                Console.Write($"{word} ");
+        - pause for some seconds, and present with other prompts until user time has reached the limit.
+        */
+    }
+    class Listing
+    {
+        /*
+        - attribute: description = "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area."
+        - select random prompt:
+            prompts = {
+                Who are people that you appreciate?
+                What are personal strengths of yours?
+                Who are people that you have helped this week?
+                When have you felt the Holy Ghost this month?
+                Who are some of your personal heroes?
             }
-            Console.ReadLine();
-            totalNumbersToAdd = 0;
-        }
-
-
-
+        - give a pause for the user to reflect
+        - prompt to keep listing items, and retrieve the number of entries the user created
+        - display number of entries
+        */
     }
 }
